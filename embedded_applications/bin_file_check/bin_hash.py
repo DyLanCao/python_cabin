@@ -14,6 +14,18 @@ def check_file_hash(bin_file):
     return thehash.hexdigest()
 
 
+def check_file_hash_sha2(bin_file):
+    f = open(bin_file,"rb")
+    thehash = hashlib.sha256()
+    theline = f.readline()
+
+    while(theline):
+        thehash.update(theline)
+        theline = f.readline()
+
+    return thehash.hexdigest()
+
+
 def get_parser():
     parser = argparse.ArgumentParser(description='change extension of files in a working directory')
     parser.add_argument('bin_file', metavar='BIN_FILE', type=str, nargs=1,
@@ -27,7 +39,10 @@ def main():
     bin_file = args['bin_file'][0]
 
     hash_value = check_file_hash(bin_file)
-    print("hash_value",hash_value)
+    print("hash_value md5:",hash_value)
+
+    hash_value = check_file_hash_sha2(bin_file)
+    print("hash_value sha2:",hash_value)
 
 if __name__=='__main__':
     main()

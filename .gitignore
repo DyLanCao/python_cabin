@@ -6,6 +6,7 @@
 .DS_Store
 .c9
 .coverage
+.sw*
 .python-version
 _site
 htmlcov
